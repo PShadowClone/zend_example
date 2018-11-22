@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="username">Username <span class="danger">*</span></label>
+                <input type="text" class="form-control" name="username"
+                       value="<?= isset($this->data['username']) && !is_null($this->data['username']) ? $this->data['username'] : '' ?>"
+                >
+            </div>
+            <div class="form-group">
+                <label for="email">Email <span class="danger">*</span></label>
+                <input type="text" class="form-control" name="email"
+                       value="<?= isset($this->data['email']) && !is_null($this->data['email']) ? $this->data['email'] : '' ?>"
+                >
+            </div>
+            <div class="form-group">
+                <label for="password">Password <span class="danger">*</span></label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm password <span class="danger">*</span></label>
+                <input type="password" class="form-control" name="confirm_password">
+            </div>
+            <div class="form-action text-center">
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                <input type="reset" name="cancel" value="Cancel" class="btn btn-danger">
+            </div>
+        </form>
+    </div>
+</div>

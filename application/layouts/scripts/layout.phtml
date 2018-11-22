@@ -1,0 +1,73 @@
+<!-- application/layouts/scripts/layout.phtml yuyyyy -->
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="<?= $this->dir ?>">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><?= $this->translate->_('page_title') ?></title>
+    <!-- ADDING MASTER PAGE STYLE START -->
+    <?php echo $this->headLink()->appendStylesheet('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'); ?>
+    <?php echo $this->headLink()->appendStylesheet(asset('css/style.css')); ?>
+    <?php echo $this->headLink()->appendStylesheet(asset('css/style_' . $this->translate->getLocale() . '.css')); ?>
+    <!-- ADDING MASTER PAGE STYLE END -->
+    <!-- ADDING JQUERY LINK IN THE TOP OF MASTER PAGE START-->
+    <script src="https://code.jquery.com/jquery-3.1.0.js" type="text/javascript"></script>
+    <!-- ADDING JQUERY LINK IN THE TOP OF MASTER PAGE END-->
+
+</head>
+<body>
+<!---->
+<div class="pos-f-t" <?= Zend_Auth::getInstance()->hasIdentity() ? '' : 'style="display:none"' ?>>
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+            <h4 class="text-white">Collapsed content</h4>
+            <span class="text-muted">Toggleable via the navbar brand.</span>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span style="color: #FFFFFF"><?= $this->translate->_('welcome_mr') ?> <?= Zend_Auth::getInstance()->hasIdentity() ? $this->auth()->username : '' ?>
+        </span>
+
+        <a href="<?= $this->url(['lang' => 'ar'], 'lang_update') ?>"><?= $this->translate->_('arabic') ?></a>
+        <a href="<?= $this->url(['lang' => 'en'], 'lang_update') ?>"><?= $this->translate->_('english') ?></a>
+        <a href="<?= $this->url([], 'auth/logout'); ?>"><?= $this->translate->_('logout') ?></a>
+    </nav>
+</div>
+<div class="container">
+
+    <!--    @ToDo continue the success message -->
+    <div class="alert alert-success" <?php echo isset($this->success) && !is_null($this->success) ? '' : 'style="display:none"' ?>>
+        <div></div>
+    </div>
+    <div class="alert alert-danger" <?php echo is_null($this->validationMessage) || sizeof($this->validationMessage) == 0 ? 'style="display:none"' : ''; ?> >
+        <div>
+            <ul>
+                <?php
+
+                if ($this->validationMessage != null && sizeof($this->validationMessage) > 0) {
+                    foreach ($this->validationMessage as $key => $value) {
+                        if (is_array($value))
+                            echo '<li>' . $value[key($value)] . '</li>';
+                        else
+                            echo '<li>' . $value . '</li>';
+                    }
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+    <!-- RENDERING DYNAMIC PAGE CONTENT START-->
+    <?php echo $this->layout()->content; ?>
+    <!-- RENDERING DYNAMIC PAGE CONTENT END-->
+</div>
+<!--ADDING SCRIPT FILES START-->
+<?php $this->headScript()->appendFile('https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js', 'text/javascript'); ?>
+<?php $this->headScript()->appendFile('https://unpkg.com/sweetalert/dist/sweetalert.min.js', 'text/javascript'); ?>
+<?php echo $this->headScript(); ?>
+<!--ADDING SCRIPT FILES END-->
+
+</body>
+</html>

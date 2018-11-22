@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="form-group text-center image-container">
+                        <img src="<?= asset($this->auth()->avatar == null ? "files/no_image.jpeg" : $this->auth()->avatar) ?>"
+                             alt="">
+                    </div>
+
+                    <div class=" form-group text-center upload-image">
+                        <label for="image_name"
+                               class="btn btn-primary label-image"><?= $this->translate->_('upload_image') ?></label>
+                        <input type="file" name="image_name" id="image_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="username"><?= $this->translate->_('username') ?> <span
+                                    class="danger">*</span></label>
+                        <input type="text" class="form-control" name="username"
+                               value="<?= $this->auth()->username ?>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><?= $this->translate->_('email') ?> <span class="danger">*</span></label>
+                        <input type="text" class="form-control" name="email"
+                               value="<?= $this->auth()->email ?>">
+                    </div>
+                    <div class="form-action text-center">
+                        <input type="submit" name="submit" value="<?= $this->translate->_('submit') ?>"
+                               class="btn btn-primary">
+                        <input type="reset" name="cancel" value="<?= $this->translate->_('cancel') ?>"
+                               class="btn btn-danger">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-danger" style="margin-top: 15px">
+            <div class="panel-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"><?= $this->translate->_('username') ?></th>
+                        <th scope="col"><?= $this->translate->_('email') ?></th>
+                        <th scope="col"><?= $this->translate->_('options') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if (isset($this->users) && !is_null($this->users)) {
+                        for ($counter = 0; $counter < sizeof($this->users); $counter++) {
+                            if ($this->users[$counter]['email'] == $this->auth()->email)
+                                continue;
+                            echo '<tr>
+                                    <td>' . $counter . '</td>
+                                    <td>' . $this->users[$counter]['username'] . '</td>
+                                    <td>' . $this->users[$counter]['email'] . '</td>
+                                    <td><span class="btn btn-danger remove-user" data-value="' . $this->users[$counter]['id'] . '" data-name="' . $this->users[$counter]['username'] . '">' . $this->translate->_('remove') . '</span></td>
+                                  </tr>';
+                        }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--PAGE LEVEL SCRIPT START-->
+<?php $this->headScript()->appendFile(asset('js/profile.js'), 'text/javascript'); ?>
+<!--PAGE LEVEL SCRIPT END-->

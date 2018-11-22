@@ -1,0 +1,28 @@
+.error {
+    color: red;
+}
+
+.danger {
+    color: red !important;
+}
+
+.image-container {
+    margin-top: 15px;
+}
+
+.image-container > img {
+    width: 146px;
+    border-radius: 50%;
+}
+
+.upload-image > input {
+    display: none;
+}
+
+.swal-footer {
+    text-align: center !important;
+}
+
+td, th {
+    text-align: center;
+}

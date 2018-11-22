@@ -1,0 +1,54 @@
+<!--PAGE CONTENT START-->
+<div class="row">
+    <div class="col-md-12">
+        <form action="" id="contact-us" method="POST">
+            <div class="form-group">
+                <label for="username">User name</label>
+                <input type="text" class="form-control" name="username">
+                <span class="error">
+                <?= $this->validationMessage && $this->validationMessage['username'] ? $this->validationMessage['username'][key($this->validationMessage['username'])]
+                    : ''
+                ?>
+               </span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email">
+                <span class="error">
+                <?= $this->validationMessage && isset($this->validationMessage['email'])
+                    ? $this->validationMessage['email'][key($this->validationMessage['email'])]
+                    : '' ?>
+                    </span>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title">
+                <span class="error">
+                <?= $this->validationMessage && isset($this->validationMessage['title'])
+                    ? $this->validationMessage['title'][key($this->validationMessage['title'])]
+                    : '' ?>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea name="message" id="" cols="30" rows="6" class="form-control"></textarea>
+                <span class="error">
+                <?= $this->validationMessage && isset($this->validationMessage['message'])
+                    ? $this->validationMessage['message'][key($this->validationMessage['message'])]
+                    : '' ?>
+                </span>
+            </div>
+            <div class="form-action text-center">
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                <input type="reset" name="reset" value="Cancel" class="btn btn-danger">
+            </div>
+
+        </form>
+    </div>
+</div>
+<!--PAGE CONTENT END-->
+<!--PAGE LEVEL SCRIPT START-->
+<?php //$this->headScript()->appendFile('js/create.js', 'text/javascript'); ?>
+<!--PAGE LEVEL SCRIPT END-->
